@@ -4,6 +4,13 @@ MIT
 @angular/fire
 MIT
 
+@firebase/app
+Apache-2.0
+
+firebase/app
+
+firebase/auth
+
 rxjs
 Apache-2.0
                                Apache License
