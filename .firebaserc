@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kshop-46dab": {
+      "hosting": {
+        "kshop": [
+          "kshop-46dab"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kshop-46dab"
+  }
+}
