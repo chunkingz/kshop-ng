@@ -4,8 +4,6 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
-// import { AngularFireDatabase } from '@angular/fire/database';
-// import { AngularFireAuth } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
 import { BsNavbarComponent } from './components/bs-navbar/bs-navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -19,6 +17,8 @@ import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orde
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -40,11 +40,11 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireDatabase,
-    // AngularFireAuth
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
