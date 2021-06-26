@@ -15,7 +15,7 @@
                 <a class="nav-link" routerLink="/login">Login</a>
               </li>
             </ng-template>
-            <li *ngIf="user$ | async as user; else anonUser" class="nav-item dropdown" ngbDropdown>
+            <li *ngIf="auth.user$ | async as user; else anonUser" class="nav-item dropdown" ngbDropdown>
               <a id="dropdown01" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
                 {{ user.displayName }}
               </a>
