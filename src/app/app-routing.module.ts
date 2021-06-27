@@ -10,6 +10,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 
 
@@ -24,8 +25,16 @@ import { AuthGuardService } from './services/auth-guard.service';
     { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
     { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
     
-    { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
-    { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
+    { 
+      path: 'admin/products', 
+      component: AdminProductsComponent, 
+      canActivate: [AuthGuardService, AdminAuthGuardService] 
+    },
+    { 
+      path: 'admin/orders', 
+      component: AdminOrdersComponent, 
+      canActivate: [AuthGuardService, AdminAuthGuardService] 
+    },
 
     { path: '**', component: NotFoundComponent },
 
