@@ -1,51 +1,81 @@
 
 <br>
-<form (ngSubmit)="save(f.value)" #f="ngForm">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input #title="ngModel" ngModel name="title" id="title" type="text" class="form-control" required>
-        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
-            Title is required.
-        </div>
-    </div>
-    <br>
-    <div class="form-group">
-        <label for="price">Price</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">N</div>
+<div class="row">
+    <div class="col-md-6">
+        <form (ngSubmit)="save(f.value)" #f="ngForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input #title="ngModel" [(ngModel)]="product[3]" name="title" id="title" type="text" class="form-control" required>
+                <div class="alert alert-danger d-flex align-items-center" *ngIf="title.touched && title.invalid" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div>
+                        Title is required.
+                    </div>
+                </div>
             </div>
-            <input #price="ngModel" ngModel name="price" id="price" type="number" class="form-control" required [min]="0">
-        </div>
-        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
-            <div *ngIf="price.errors!.required">Price is required.</div>
-            <div *ngIf="price.errors!.min">Price should be 0 or higher</div>
-        </div>
+            <br>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">N</div>
+                    </div>
+                    <input #price="ngModel" [(ngModel)]="product[2]" name="price" id="price" type="number" class="form-control" required [min]="0">
+                </div>
+                <div class="alert alert-danger d-flex align-items-center" *ngIf="price.touched && price.invalid" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div *ngIf="price.errors!.required">Price is required.</div>
+                    <div *ngIf="price.errors!.min">Price should be 0 or higher</div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select #category="ngModel" [(ngModel)]="product[0]" name="category" id="category" class="form-control" required>
+                    <option value=""></option>
+                    <option *ngFor="let c of categories$ | async" [value]="c.key">
+                        {{ c.payload.val().name }}
+                    </option>
+                </select>
+                <div class="alert alert-danger d-flex align-items-center" *ngIf="category.touched && category.invalid" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div>
+                        Category is required.
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="imageUrl">Image URL</label>
+                <input #imageUrl="ngModel" [(ngModel)]="product[1]" name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
+                <div class="alert alert-danger d-flex align-items-center" *ngIf="imageUrl.touched && imageUrl.invalid" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div *ngIf="imageUrl.errors!.required">Image URL is required.</div>
+                    <div *ngIf="imageUrl.errors!.url">Please enter a valid URL.</div>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-primary btn-lg" type="submit">Save</button> &nbsp;
+            <button class="btn btn-danger btn-lg" type="reset">Clear</button>
+            
+        </form>
     </div>
-    <br>
-    <div class="form-group">
-        <label for="category">Category</label>
-        <select #category="ngModel" ngModel name="category" id="category" class="form-control" required>
-            <option value=""></option>
-            <option *ngFor="let c of categories$ | async" [value]="c.key">
-                {{ c.payload.val().name }}
-            </option>
-        </select>
-        <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
-            Category is required.
-        </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 20rem;">
+            <img [src]="imageUrl.value" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title"> {{ title.value }}</h5>
+              <p class="card-text">N {{ price.value }}</p>
+            </div>
+          </div>
     </div>
-    <br>
-    <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
-        <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
-            <div *ngIf="imageUrl.errors!.required">Image URL is required.</div>
-            <div *ngIf="imageUrl.errors!.url">Please enter a valid URL.</div>
-        </div>
-    </div>
-    <br>
-    <button class="btn btn-primary btn-lg" type="submit">Save</button> &nbsp;
-    <button class="btn btn-danger btn-lg" type="reset">Clear</button>
-    
-</form>
+</div>
+
