@@ -4,20 +4,28 @@
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
 <br>
+<p>
+  <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
+</p>
+<br>
 <table class="table">
     <thead>
       <tr>
         <th scope="col">Title</th>
         <th scope="col">Price</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of products$ | async">
-        <td>{{ p.payload.val().title }}</td>
-        <td>{{ p.payload.val().price }}</td>
+      <tr *ngFor="let p of filteredProducts">
+        <td>{{ p.data.title }}</td>
+        <td>{{ p.data.price }}</td>
         <td>
-            <a [routerLink]="['/admin/products/', p.key]">Edit</a>
+            <a [routerLink]="['/admin/products/', p.key]">Edit</a> ✍️ 
+        </td>
+        <td>
+            <a (click)="delete(p.key)" id="delete">Delete</a> 🗑 
         </td>
       </tr>
     </tbody>
