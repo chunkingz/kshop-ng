@@ -20,7 +20,6 @@ export class LoginComponent {
 
     this.auth.appUser$.subscribe(appUser => {
       this.user = appUser;
-      console.log(appUser);
       if(appUser){
         this.router.navigate(['/']);
       }
