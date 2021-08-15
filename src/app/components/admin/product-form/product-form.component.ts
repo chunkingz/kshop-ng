@@ -23,7 +23,7 @@ export class ProductFormComponent {
     private route: ActivatedRoute
     ) {
     
-      this.categories$ = categoryService.getCategories().snapshotChanges();
+      this.categories$ = categoryService.getAll().snapshotChanges();
 
       this.id = route.snapshot.paramMap.get('id');
       
